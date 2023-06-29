@@ -1,6 +1,7 @@
 const Admin = document.getElementById('Admin');
 const Seller =document.getElementById('Seller');
 const Login=document.getElementById('Login');
+const LogOut=document.getElementById('LogOut');
 const Catagory =document.getElementById('Cat');
 const ProductAdd=document.getElementById('ProductAdd');
 
@@ -44,6 +45,8 @@ SellerButton.addEventListener('click', function() {
       Login.style.display = 'none';
     }
   });
+
+  
 
   AddCat.addEventListener('click', function() {
     if (Catagory.style.display === 'none') {

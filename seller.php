@@ -166,20 +166,18 @@
       id="LoginButton"
       type="button"
       class="btn btn-secondary"
-      style="background-color: rgb(255, 211, 52); color: black; margin-right: .3rem;"
+      style="background-color: rgb(255, 211, 52); color: black; margin-right: .3rem; display: none;"
     >
       Login.
     </button>
-    <form action="index.php" method="post">
-    <button
-      name="logOut"
-      type="button"
-      class="btn btn-secondary"
-      style="background-color: rgb(255, 211, 52); color: black;  margin-right: .3rem;"
-    >
-      LogOut.
-    </button>
-    </form>
+
+    <a href="logout.php"
+        name="logOut"
+        type="button"
+        class="btn btn-secondary"
+        style="background-color: rgb(255, 211, 52); color: black;  margin-right: .3rem;">
+        LogOut.
+    </a>
 
     </nav>
 </header>

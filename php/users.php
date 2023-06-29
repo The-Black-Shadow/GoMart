@@ -73,15 +73,4 @@ if(isset($_POST['logIn'])){
 }
 
 
-// Check if the logOut button is pressed
-if (isset($_POST['logOut'])) {
-    // Destroy all session data
-    session_destroy();
-    
-    // Redirect to the index.php page
-    header("Location: ./index.php");
-    exit();
-}
-
-
 ?>

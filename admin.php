@@ -7,7 +7,7 @@
     echo '<script>alert("' . $_SESSION['success_message'] . '");</script>';
     unset($_SESSION['success_message']); // Clear the session variable
   }
-  
+
  ?>
 
 <!DOCTYPE html>
@@ -167,17 +167,17 @@
       id="LoginButton"
       type="button"
       class="btn btn-secondary"
-      style="background-color: rgb(255, 211, 52); color: black; margin-right: .3rem;"
+      style="background-color: rgb(255, 211, 52); color: black; margin-right: .3rem; display: none;"
     >
       Login.
     </button>
-    <button
-      type="button"
-      class="btn btn-secondary"
-      style="background-color: rgb(255, 211, 52); color: black;  margin-right: .3rem;"
-    >
-      LogOut.
-    </button>
+    <a href="logout.php"
+        name="logOut"
+        type="button"
+        class="btn btn-secondary"
+        style="background-color: rgb(255, 211, 52); color: black;  margin-right: .3rem;">
+        LogOut.
+    </a>
 
     </nav>
 </header>

@@ -7,6 +7,17 @@
     echo '<script>alert("' . $_SESSION['success_message'] . '");</script>';
     unset($_SESSION['success_message']); // Clear the session variable
   }
+    
+  if(isset($_SESSION['acctype']) && $_SESSION['acctype'] == 'seller'){
+    header("Location: seller.php");
+    exit();
+  }
+
+  
+  if(isset($_SESSION['acctype']) && $_SESSION['acctype'] == 'admin'){
+    header("Location: admin.php");
+    exit();
+  }
  ?>
 
 <!DOCTYPE html>
@@ -70,7 +81,7 @@
         </ul>
       </div>
       <a id="widthActive" href="">kaka</a>
-      <a href="https://www.facebook.com/"
+      <a href="#LoginButton"
         ><button class="btn btn-outline-success my-2 my-sm-0">
           My Profile
         </button></a
@@ -176,9 +187,10 @@
       Login.
     </button>
     <button
+      id="LogOutButton"
       type="button"
-      class="btn btn-secondary"
-      style="background-color: rgb(255, 211, 52); color: black;  margin-right: .3rem;"
+      class="btn btn-secondary LoginButton"
+      style="background-color: rgb(255, 211, 52); color: black;  margin-right: .3rem; display: none;"
     >
       LogOut.
     </button>
