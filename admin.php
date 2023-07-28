@@ -2,6 +2,7 @@
 <?php
   include 'php/connection.php';
   include 'php/users.php';
+  include 'php/catagory.php';
   session_start();
   if(isset($_SESSION['success_message'])){
     echo '<script>alert("' . $_SESSION['success_message'] . '");</script>';
@@ -377,22 +378,22 @@
 <!-- Seller SignUp sesh -->
 <br>
 <!-- Add Catagory -->
-<form style="display: none;" id="Cat">
-  <h3>Add Catagory</h3>
+<form style="display: none;" id="Cat" method='POST' enctype="multipart/form-data">
+  <h3>Add Category</h3>
   <br>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Name Of Catagory.</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <label for="inputEmail4">Name Of Category</label>
+      <input type="text" name="category_name" class="form-control" id="inputEmail4">
     </div>
     
     <div class="form-group col-md-2">
       <label for="inputZip">Image</label>
-      <input type="file" id="InputCatImage">
+      <input type="file" name="category_image" id="InputCatImage">
     </div>
   </div>
   
-  <button type="submit" class="btn btn-primary">Add</button>
+  <button type="submit" name="subCat" class="btn btn-primary">Add</button>
 </form>
 
 <!-- Add Catagory sesh -->
