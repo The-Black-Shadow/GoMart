@@ -1,13 +1,12 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['subCat'])) {
-        // Process form data and perform insertion
-        $categoryName = isset($_POST['category_name']) ? htmlspecialchars($_POST['category_name']) : '';
-        $categoryImage = isset($_FILES['category_image']) ? $_FILES['category_image'] : '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subcat'])) {
+    // Process form data and perform insertion
+    $categoryName = isset($_POST['category_name']) ? htmlspecialchars($_POST['category_name']) : '';
+    $categoryImage = isset($_FILES['category_image']) ? $_FILES['category_image'] : '';
 
-        if (empty($categoryName) || empty($categoryImage)) {
-            echo "Please fill in all the required fields.";
-        } else {
+    if (empty($categoryName) || empty($categoryImage)) {
+        echo "Please fill in all the required fields.";
+    } else {
         // Upload directory on the server where the images will be saved
         $uploadDir = 'uploads/';
 
@@ -22,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Move the uploaded image to the upload directory
         $targetPath = $uploadDir . $imageName;
         if (move_uploaded_file($categoryImage['tmp_name'], $targetPath)) {
-            // Database connection parameters
+            // Database connection parameters (replace with your actual database credentials)
             include 'connection.php';
 
             // Prepare the data for database insertion
@@ -40,10 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Close the connection
             $conn->close();
+
+            // Redirect to the same page to prevent form resubmission
+            header("Location: ".$_SERVER['PHP_SELF']);
+            exit;
         } else {
             echo "Error uploading the image.";
         }
     }
-}
 }
 ?>
