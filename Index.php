@@ -27,7 +27,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GoMart-a online shopping controller</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -52,6 +51,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/toggle.js" defer></script>
   </head>
+  
   <body>
 
 <!-- This is the header part -->
@@ -451,171 +451,47 @@
 <div style="padding: 0rem;" class="container-fluid pt-5">
   <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categories</span></h2>
   <div class="row px-xl-5 pb-3">
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <!-- </div> -->
+    <?php
+    // Retrieve categories data from the database
+    $sql = "SELECT name, image FROM categories";
+    $result = $conn->query($sql);
+
+    // Check if there are any categories in the database
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $categoryName = $row['name'];
+            $imagePath = $row['image'];
+    ?>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <!-- Use the $imagePath variable to set the image source -->
+                            <img class="img-fluid" src="<?php echo $imagePath; ?>" alt="<?php echo $categoryName; ?>">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <!-- Use the $categoryName variable to set the category name -->
+                            <h6><?php echo $categoryName; ?></h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+    <?php
+        }
+    } else {
+        echo "No categories found.";
+    }
+
+    // Close the connection
+    $conn->close();
+    ?>
+  </div>
+</div>
 
       <!-- ei ses php block of code -->
 
-<!-- Code for show Will Delet Latter -->
 
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-4.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-4.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-4.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div  class="col-lg-3 col-md-4 col-sm-6 pb-1">
-          <a class="text-decoration-none" href="">
-              <div id="cat" class="cat-item img-zoom d-flex align-items-center mb-4">
-                  <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                      <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                  </div>
-                  <div class="flex-fill pl-3">
-                      <h6>Category Name</h6>
-                      <small class="text-body">100 Products</small>
-                  </div>
-              </div>
-          </a>
-      </div>
-  </div>
-</div>
-<!-- will delet later end -->
 <hr>
 <!-- Product Starts Here -->
 
