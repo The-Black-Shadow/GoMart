@@ -401,32 +401,43 @@
 
 
 <!-- Add Products -->
-<form style="display: none;" id="ProductAdd">
+<form style="display: none;" id="ProductAdd" method='POST' enctype="multipart/form-data">
   <h3>Add Product</h3>
   <br>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Name Of Product</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input type="text" class="form-control" id="inputEmail4" name="productName">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Price</label>
-      <input type="password" class="form-control" id="inputPassword4">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Catagory</label><br>
-      <Select >
-        <option value="Chineese">Chineese</option>
-        <option value="cookie">Cookie</option>
-      </Select>
-    </div>
+  <label for="inputPassword4">Category</label><br>
+  <select class="form-control" name="category">
+    <?php
+      $sql = "SELECT name, image FROM categories";
+      $result = $conn->query($sql);
+
+      // Check if there are any categories in the database
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $categoryName = $row['name'];
+    ?>
+          <option value="<?php echo $categoryName; ?>"><?php echo $categoryName; ?></option>
+    <?php
+        }
+      } else {
+        echo "<option value=''>No categories found</option>";
+      }
+    ?>
+  </select>
+</div>
+
     <div class="form-group col-md-2">
-      <label for="inputZip">Image</label>
-      <input type="file" id="InputCatImage">
+      <label for="InputCatImage">Image</label>
+      <input type="file" id="InputCatImage" name="productImage">
     </div>
   </div>
   
-  <button type="submit" class="btn btn-primary">Add</button>
+  <button type="submit" class="btn btn-primary" name="subProd">Add</button>
 </form>
 
 <!-- Add Products sesh -->
