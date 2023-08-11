@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subcat'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subProd'])) {
     // Process form data and perform insertion
+    $priceProduct = isset($_POST['productName']) ? htmlspecialchars($_POST['priceProduct']) : '';
     $productName = isset($_POST['productName']) ? htmlspecialchars($_POST['productName']) : '';
     $categoryName = isset($_POST['category']) ? htmlspecialchars($_POST['category']) : '';
     $productImage = isset($_FILES['productImage']) ? $_FILES['productImage'] : '';
@@ -78,11 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subProd'])) {
 
             // Prepare the data for database insertion
             $escapedProductName = $conn->real_escape_string($productName);
+            $escapedPriceProduct = $conn->real_escape_string($priceProduct);
             $escapedCategoryName = $conn->real_escape_string($categoryName);
             $escapedImagePath = $conn->real_escape_string($targetPath);
 
             // SQL query to insert the product details into the database
-            $sql = "INSERT INTO products (product_name, category, image) VALUES ('$escapedProductName', '$escapedCategoryName', '$escapedImagePath')";
+            $sql = "INSERT INTO products (product_name, price, category, image) VALUES ('$escapedProductName','$escapedPriceProduct', '$escapedCategoryName', '$escapedImagePath')";
 
             if ($conn->query($sql) === true) {
                 echo "Product added successfully!";

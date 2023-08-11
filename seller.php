@@ -403,32 +403,47 @@
 
 
 <!-- Add Products -->
-<form style="display: none;" id="ProductAdd">
+<form style="display: none;" id="ProductAdd" method='POST' enctype="multipart/form-data">
   <h3>Add Product</h3>
   <br>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Name Of Product</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input type="text" class="form-control" id="inputEmail4" name="productName">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Price</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <label for="inputEmail4">Price Of Product</label>
+      <input type="text" class="form-control" id="inputEmail4" name="priceProduct">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Catagory</label><br>
-      <Select >
-        <option value="Chineese">Chineese</option>
-        <option value="cookie">Cookie</option>
-      </Select>
-    </div>
+  <label for="inputPassword4">Category</label><br>
+  <select class="form-control" name="category">
+    <?php
+      $sql = "SELECT name, image FROM categories";
+      $result = $conn->query($sql);
+
+      // Check if there are any categories in the database
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $categoryName = $row['name'];
+    ?>
+          <option value="<?php echo $categoryName; ?>"><?php echo $categoryName; ?></option>
+    <?php
+        }
+      } else {
+        echo "<option value=''>No categories found</option>";
+      }
+    ?>
+  </select>
+</div>
+
     <div class="form-group col-md-2">
-      <label for="inputZip">Image</label>
-      <input type="file" id="InputCatImage">
+      <label for="InputCatImage">Image</label>
+      <input type="file" id="InputCatImage" name="productImage">
     </div>
   </div>
   
-  <button type="submit" class="btn btn-primary">Add</button>
+  <button type="submit" class="btn btn-primary" name="subProd">Add</button>
 </form>
 
 <!-- Add Products sesh -->
@@ -458,7 +473,6 @@
                         <div class="flex-fill pl-3">
                             <!-- Use the $categoryName variable to set the category name -->
                             <h6><?php echo $categoryName; ?></h6>
-                            <small class="text-body">100 Products</small>
                         </div>
                     </div>
                 </a>
@@ -484,30 +498,31 @@
 
 <div id="Products">
 
-<h2>Products</h2>
+  <h2>Products</h2>
 
-  <div class="product">
-    <img src="Images/charlesdeluvio-FK81rxilUXg-unsplash.jpg" alt="Product Image">
-    <h3>Product Name</h3>
-    <p class="price">$19.99</p>
-    <div class="actions">
-        <button>Sell</button>
-        <button class="delete">Delete Product</button>
-    </div>
-</div>
-
-<div class="product">
-    <img src="Images/freestocks-_3Q3tsJ01nc-unsplash.jpg" alt="Product Image">
-    <h3>Product Name</h3>
-    <p class="price">$29.99</p>
-    <div class="actions">
-        <button>Sell</button>
-        <button class="delete">Delete Product</button>
-    </div>
-</div>
-
-
-
+  <?php
+  $sql = "SELECT product_name, price, category, image FROM products";
+  $result = $conn->query($sql);
+  // Check if there are any categories in the database
+  if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+          $productName = $row['product_name'];
+          $productPrice = $row['price'];
+          $productCategory = $row['category'];
+          $imagePath = $row['image'];
+  ?>
+          <div class="product">
+            <img src="<?php echo $imagePath; ?>" alt="Product Image">
+            <h3><?php echo $productCategory; ?></h3>
+            <h2><?php echo $productName ?></h2>
+            <p class="price">$<?php echo $productPrice; ?></p>
+          </div>
+  <?php
+      }
+  } else {
+      echo "<p>No products found.</p>";
+  }
+  ?>
 
 </div>
 
