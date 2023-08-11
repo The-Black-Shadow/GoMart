@@ -489,10 +489,6 @@
   </div>
 </div>
 
-      <!-- ei ses php block of code -->
-
-
-<!-- will delet later end -->
 <hr>
 <!-- Product Starts Here -->
 
